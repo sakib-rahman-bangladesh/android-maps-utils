@@ -39,10 +39,10 @@ You can view the generated [reference docs][javadoc] for a full list of classes 
 ```groovy
 dependencies {
     // Utilities for Maps SDK for Android (requires Google Play Services) 
-    implementation 'com.google.maps.android:android-maps-utils:2.0.3'
+    implementation 'com.google.maps.android:android-maps-utils:2.2.2'
 
     // Alternately - Utilities for Maps SDK v3 BETA for Android (does not require Google Play Services)
-    implementation 'com.google.maps.android:android-maps-utils-v3:2.0.3'
+    implementation 'com.google.maps.android:android-maps-utils-v3:2.2.2'
 }
 ```
 
@@ -52,12 +52,14 @@ dependencies {
 
 This repository includes a [demo app](demo) that illustrates the use of this library.
 
+The version that depends on the Maps SDK for Android can be found under the `gms` Gradle product flavor, while version that depends on the Maps SDK V3 BETA can be found under the `v3` Gradle product flavor. The active product flavor can be modified through Android Studio’s [“Build Variants”](https://developer.android.com/studio/run#changing-variant) toolbar options.
+
 To run the demo app, you'll have to:
 
 1. [Get a Maps API key](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
 1. Create a file in the `demo` directory called `secure.properties` (this file should *NOT* be under version control to protect your API key)
 1. Add a single line to `demo/secure.properties` that looks like `MAPS_API_KEY=YOUR_API_KEY`, where `YOUR_API_KEY` is the API key you obtained in the first step
-1. Build and run
+1. Build and run the `gmsDebug` variant for the Maps SDK for Android version, or `v3Debug` for the Maps SDK v3 BETA version
 
 ## Migration Guide
 
@@ -95,7 +97,7 @@ kmlLayer.setOnFeatureClickListener(feature -> {
 
 #### Using Manager Objects
 
-If you use one of Manager objects in the package `com.google.maps.android` (e.g. `GroundOverlayManager`, `MarkerManager`, etc.), say from adding a KML layer, GeoJson layer, or Clustering, you will have to rely on the Collection specific to add add object to the map rather than adding that object directly to `GoogleMap`. This is because each Manager sets itself as a click listener so that it can manager click events coming from multiple layers.
+If you use one of Manager objects in the package `com.google.maps.android` (e.g. `GroundOverlayManager`, `MarkerManager`, etc.), say from adding a KML layer, GeoJson layer, or Clustering, you will have to rely on the Collection specific to add an object to the map rather than adding that object directly to `GoogleMap`. This is because each Manager sets itself as a click listener so that it can manage click events coming from multiple layers.
 
 For example, if you have additional `GroundOverlay` objects:
 
@@ -206,7 +208,7 @@ If you're using custom clustering (i.e, if you're extending `DefaultClusterRende
 
 **Note that these methods can't be identical, as you need to use a `Marker` instead of `MarkerOptions`*
 
-See the [`CustomMarkerClusteringDemoActivity`](demo/src/main/java/com/google/maps/android/utils/demo/CustomMarkerClusteringDemoActivity.java) in the demo app for a complete example.
+See the [`CustomMarkerClusteringDemoActivity`](demo/src/gms/java/com/google/maps/android/utils/demo/CustomMarkerClusteringDemoActivity.java) in the demo app for a complete example.
 
 _New_
 
